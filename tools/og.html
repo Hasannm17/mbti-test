@@ -1,0 +1,33 @@
+<!doctype html>
+<!-- 1200×630 link-preview card, screenshotted by build.mjs. ?t=INTJ for a type, nothing for the default card. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@600&family=JetBrains+Mono:wght@500&family=Noto+Kufi+Arabic:wght@600;800&display=swap">
+<style>
+html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#eef0f6;color:#161a2e}
+.c{box-sizing:border-box;margin:28px;height:574px;background:#fff;border-radius:28px;padding:52px 64px;display:flex;flex-direction:column;justify-content:space-between}
+.eb{font:500 22px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#5b6178}
+.code{font:800 230px/.85 "Bricolage Grotesque",sans-serif;letter-spacing:-.04em;color:#3a5bd9}
+.big{font:800 60px/1.1 "Bricolage Grotesque","Noto Kufi Arabic",sans-serif;letter-spacing:-.01em}
+.ar{font-family:"Noto Kufi Arabic",sans-serif;letter-spacing:0}
+.foot{display:flex;justify-content:space-between;align-items:center;font:600 26px "Instrument Sans","Noto Kufi Arabic",sans-serif;color:#5b6178}
+.foot b{color:#3a5bd9;font-weight:600}
+.axes{font:800 44px "Bricolage Grotesque",sans-serif;color:#3a5bd9;letter-spacing:.02em}
+</style>
+</head>
+<body>
+<div class="c" id="c"></div>
+<script src="../data.js"></script>
+<script>
+const t=new URLSearchParams(location.search).get("t");
+document.getElementById("c").innerHTML = t
+ ? `<div class="eb">16 types personality test</div>
+    <div><div class="code">${t}</div><div class="big">${TYPES[t].en[0]} · <span class="ar" dir="rtl">${TYPES[t].ar[0]}</span></div></div>
+    <div class="foot"><span>Which type are you? · <span class="ar" dir="rtl">أيّ نمط أنت؟</span></span><b>${SITE}</b></div>`
+ : `<div class="eb">Free personality test · 40 statements · English &amp; <span class="ar" dir="rtl">العربية</span></div>
+    <div><div class="big" style="font-size:76px">Which of the 16 types are you?</div><div class="big ar" dir="rtl" style="margin-top:14px">أيّ الأنماط الـ16 أنت؟</div></div>
+    <div class="foot"><span class="axes">E/I · S/N · T/F · J/P</span><b>${SITE}</b></div>`;
+</script>
+</body>
+</html>
