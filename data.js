@@ -111,6 +111,12 @@ const S={
   shareText:(code,name)=>`I'm ${code}, ${name}. Which of the 16 types are you?`,
   cta:"Find your type at",
   langBtn:"العربية", themeLabel:"Switch dark or light theme",
+  privacy:"Your answers stay on your device. Nothing is sent anywhere.",
+  allTypes:"Browse all 16 types", typesTitle:"The 16 types", backTypes:"All types", take:"Take the test",
+  careers:"Careers that fit", love:"In relationships", stress:"Under stress",
+  close:"You're also close to",
+  compareMine:"Compare with my type", youFriend:"You & your friend", you:"You", friendShort:"Friend", alike:"alike",
+  sharedLetters:n=>`You share ${n} of 4 letters.`, removeFriend:"Remove comparison",
  },
  ar:{
   title:"اختبار حسن للأنماط الـ16",
@@ -128,5 +134,63 @@ const S={
   shareText:(code,name)=>`نمطي ${code}، ${name}. أيّ الأنماط الـ16 أنت؟`,
   cta:"اكتشف نمطك على",
   langBtn:"English", themeLabel:"تبديل الوضع الداكن أو الفاتح",
+  privacy:"إجاباتك تبقى على جهازك ولا تُرسل إلى أي مكان.",
+  allTypes:"تصفّح الأنماط الـ16", typesTitle:"الأنماط الـ16", backTypes:"كل الأنماط", take:"ابدأ الاختبار",
+  careers:"مهن مناسبة", love:"في العلاقات", stress:"تحت الضغط",
+  close:"أنت قريب أيضاً من",
+  compareMine:"قارن بنمطي", youFriend:"أنت وصديقك", you:"أنت", friendShort:"صديقك", alike:"تشابه",
+  sharedLetters:n=>`تشتركان في ${n} من 4 أحرف.`, removeFriend:"إزالة المقارنة",
  },
+};
+
+// extra result sections — code: {lang: [careers, in relationships, under stress]}
+const MORE={
+ INTJ:{en:[["Strategy consultant","Engineer","Scientist","Software architect","Financial analyst"],"Loyal and private; shows love by solving problems and planning a future together. Needs a partner who respects their independence.","Becomes withdrawn and overly critical. What helps: quiet time and a clear plan."],
+       ar:[["مستشار استراتيجي","مهندس","عالِم","مهندس برمجيات","محلل مالي"],"مخلص وكتوم؛ يعبّر عن حبه بحل المشكلات والتخطيط لمستقبل مشترك. يحتاج شريكاً يحترم استقلاليته.","ينعزل ويصبح كثير الانتقاد. ما يساعده: وقت هادئ وخطة واضحة."]},
+ INTP:{en:[["Programmer","Researcher","Data scientist","Professor","Systems analyst"],"Easygoing and honest; connects through ideas and deep talks. Slow to share feelings but very loyal.","Gets stuck overthinking or snaps at people. What helps: space to think and one simple first step."],
+       ar:[["مبرمج","باحث","عالم بيانات","أستاذ جامعي","محلل أنظمة"],"هادئ وصريح؛ يتواصل عبر الأفكار والأحاديث العميقة. بطيء في التعبير عن مشاعره لكنه مخلص جداً.","يعلق في التفكير الزائد أو ينفعل على الآخرين. ما يساعده: مساحة للتفكير وخطوة أولى بسيطة."]},
+ ENTJ:{en:[["Executive","Entrepreneur","Lawyer","Management consultant","Project director"],"Committed and direct; treats a relationship like a team to build. Values a partner who challenges them.","Becomes controlling and impatient. What helps: delegating, and remembering not everything is urgent."],
+       ar:[["مدير تنفيذي","رائد أعمال","محامٍ","مستشار إداري","مدير مشاريع"],"ملتزم ومباشر؛ يرى العلاقة فريقاً يبنيه. يقدّر الشريك الذي يتحدّاه.","يصبح متسلطاً وقليل الصبر. ما يساعده: تفويض المهام وتذكّر أن ليس كل شيء عاجلاً."]},
+ ENTP:{en:[["Entrepreneur","Marketer","Product designer","Lawyer","Journalist"],"Playful and full of surprises; loves a partner who can keep up with debates and new adventures.","Scatters across too many ideas or argues more. What helps: picking one priority and finishing it."],
+       ar:[["رائد أعمال","مسوّق","مصمم منتجات","محامٍ","صحفي"],"مرح ومليء بالمفاجآت؛ يحب شريكاً يجاريه في النقاش والمغامرات الجديدة.","يتشتت بين أفكار كثيرة أو يجادل أكثر. ما يساعده: اختيار أولوية واحدة وإنهاؤها."]},
+ INFJ:{en:[["Psychologist","Writer","Teacher","Coach","Nonprofit leader"],"Deeply devoted and looking for a real soul connection. Needs honesty and time alone.","Withdraws and absorbs other people's moods. What helps: rest, boundaries and a creative outlet."],
+       ar:[["أخصائي نفسي","كاتب","معلّم","مدرّب","قائد في عمل خيري"],"مخلص بعمق ويبحث عن ارتباط روحي حقيقي. يحتاج الصدق ووقتاً لنفسه.","ينسحب ويمتص مزاج من حوله. ما يساعده: الراحة ووضع حدود ومتنفس إبداعي."]},
+ INFP:{en:[["Writer","Designer or artist","Psychologist","Social worker","Teacher"],"Romantic and loyal; looks for a partner who shares their values and accepts them fully.","Becomes self-critical and pulls away. What helps: kindness to themselves and talking to someone they trust."],
+       ar:[["كاتب","مصمم أو فنان","أخصائي نفسي","أخصائي اجتماعي","معلّم"],"رومانسي ومخلص؛ يبحث عن شريك يشاركه قيمه ويتقبّله كما هو.","يقسو على نفسه وينسحب. ما يساعده: اللطف مع النفس والحديث مع شخص يثق به."]},
+ ENFJ:{en:[["Teacher","Coach or trainer","HR manager","Public relations","Community leader"],"Warm and attentive; puts real effort into the relationship and loves helping a partner grow.","Over-helps others and forgets themselves. What helps: saying no and making time for their own needs."],
+       ar:[["معلّم","مدرّب","مدير موارد بشرية","علاقات عامة","قائد مجتمعي"],"دافئ ومنتبه؛ يبذل جهداً حقيقياً في العلاقة ويحب مساعدة شريكه على النمو.","يساعد الآخرين أكثر من اللازم وينسى نفسه. ما يساعده: قول «لا» وتخصيص وقت لاحتياجاته."]},
+ ENFP:{en:[["Creative or marketer","Journalist","Counselor","Entrepreneur","Presenter or actor"],"Affectionate and enthusiastic; brings fun and deep talks. Needs freedom and appreciation.","Feels overwhelmed and scattered. What helps: a short list and one task at a time."],
+       ar:[["مبدع أو مسوّق","صحفي","مستشار","رائد أعمال","مقدّم أو ممثل"],"حنون ومتحمس؛ يجلب المرح والأحاديث العميقة. يحتاج الحرية والتقدير.","يشعر بالإرهاق والتشتت. ما يساعده: قائمة قصيرة ومهمة واحدة في كل مرة."]},
+ ISTJ:{en:[["Accountant","Auditor","Engineer","Police or military officer","Operations manager"],"Steady and committed; shows love through reliability and keeping promises.","Becomes rigid and worries about worst cases. What helps: routine, facts and solving one problem at a time."],
+       ar:[["محاسب","مدقق حسابات","مهندس","ضابط شرطة أو جيش","مدير عمليات"],"ثابت وملتزم؛ يعبّر عن حبه بالاعتمادية والوفاء بالوعود.","يصبح جامداً ويقلق من أسوأ الاحتمالات. ما يساعده: الروتين والحقائق وحل مشكلة واحدة في كل مرة."]},
+ ISFJ:{en:[["Nurse or doctor","Teacher","Office manager","Social worker","Pharmacist"],"Caring and devoted; remembers the little things and makes a partner feel safe.","Takes on too much and feels unappreciated. What helps: asking for help and accepting thanks."],
+       ar:[["ممرض أو طبيب","معلّم","مدير مكتب","أخصائي اجتماعي","صيدلي"],"مهتم ومخلص؛ يتذكر التفاصيل الصغيرة ويُشعر شريكه بالأمان.","يحمّل نفسه الكثير ويشعر بعدم التقدير. ما يساعده: طلب المساعدة وتقبّل الشكر."]},
+ ESTJ:{en:[["Manager","Judge or lawyer","Financial officer","Military officer","School principal"],"Loyal and dependable; shows love by handling practical things and keeping commitments.","Becomes bossy and inflexible. What helps: listening first and loosening the plan."],
+       ar:[["مدير","قاضٍ أو محامٍ","مسؤول مالي","ضابط عسكري","مدير مدرسة"],"مخلص ويُعتمد عليه؛ يعبّر عن حبه بالاهتمام بالأمور العملية والوفاء بالتزاماته.","يصبح آمراً وغير مرن. ما يساعده: الاستماع أولاً وتخفيف صرامة الخطة."]},
+ ESFJ:{en:[["Nurse","Teacher","Event planner","Customer relations","HR specialist"],"Warm and generous; loves taking care of a partner and celebrating together.","Worries about what others think. What helps: reassurance, and remembering they can't please everyone."],
+       ar:[["ممرض","معلّم","منظّم فعاليات","علاقات عملاء","أخصائي موارد بشرية"],"دافئ وكريم؛ يحب الاهتمام بشريكه والاحتفال معاً.","يقلق مما يظنه الآخرون. ما يساعده: الطمأنة وتذكّر أنه لا يستطيع إرضاء الجميع."]},
+ ISTP:{en:[["Technician or mechanic","Pilot","Engineer","Paramedic","Software developer"],"Relaxed and loyal; shows care through actions more than words. Needs personal space.","Shuts down or acts on impulse. What helps: physical activity and time alone."],
+       ar:[["فني أو ميكانيكي","طيار","مهندس","مسعف","مطوّر برمجيات"],"هادئ ومخلص؛ يعبّر عن اهتمامه بالأفعال أكثر من الكلام. يحتاج مساحة شخصية.","ينغلق أو يتصرف باندفاع. ما يساعده: النشاط البدني ووقت لنفسه."]},
+ ISFP:{en:[["Designer or artist","Photographer","Chef","Physiotherapist","Veterinarian"],"Gentle and devoted; shows love through small gestures and shared experiences.","Feels hurt and withdraws. What helps: creative time, nature and a patient listener."],
+       ar:[["مصمم أو فنان","مصوّر","طاهٍ","أخصائي علاج طبيعي","طبيب بيطري"],"لطيف ومخلص؛ يعبّر عن حبه بلفتات صغيرة وتجارب مشتركة.","يتألم وينسحب. ما يساعده: وقت للإبداع والطبيعة ومستمع صبور."]},
+ ESTP:{en:[["Sales or business development","Entrepreneur","Paramedic","Athlete or coach","Detective"],"Fun and spontaneous; brings energy and adventure. Prefers showing love to talking about it.","Takes bigger risks and gets impatient. What helps: pausing before acting and thinking one step ahead."],
+       ar:[["مبيعات أو تطوير أعمال","رائد أعمال","مسعف","رياضي أو مدرّب","محقق"],"مرح وعفوي؛ يجلب الطاقة والمغامرة. يفضّل إظهار حبه بالأفعال على الحديث عنه.","يخاطر أكثر ويفقد صبره. ما يساعده: التوقف قبل التصرف والتفكير خطوة للأمام."]},
+ ESFP:{en:[["Presenter or performer","Event planner","Sales","Tour guide","Fitness trainer"],"Generous and playful; makes every moment with a partner feel special.","Avoids problems and looks for distractions. What helps: facing one problem at a time, with support."],
+       ar:[["مقدّم أو مؤدٍّ","منظّم فعاليات","مبيعات","مرشد سياحي","مدرّب لياقة"],"كريم ومرح؛ يجعل كل لحظة مع شريكه مميزة.","يتجنب المشكلات ويبحث عن الإلهاء. ما يساعده: مواجهة مشكلة واحدة في كل مرة بدعم من حوله."]},
+};
+
+// type groups for the "all 16 types" page, in TYPES order (4 each)
+const GROUPS={en:["Thinkers & strategists (NT)","Idealists & helpers (NF)","Organizers & protectors (SJ)","Doers & adapters (SP)"],
+              ar:["المفكرون والاستراتيجيون (NT)","المثاليون والداعمون (NF)","المنظّمون والحُماة (SJ)","العمليون والمتكيّفون (SP)"]};
+
+// friend comparison, per axis: same first letter / same second letter / different ("x")
+const PAIR={
+ EI:{en:{E:"You both recharge with people, so going out together comes easily.",I:"You both recharge alone, so you'll respect each other's need for quiet time.",x:"One of you recharges with people, the other alone. Balance busy plans with quiet time."},
+     ar:{E:"كلاكما يستمد طاقته من الناس، فالخروج معاً يأتي بسهولة.",I:"كلاكما يستعيد طاقته وحده، لذا ستحترمان حاجة كل منكما إلى الهدوء.",x:"أحدكما يستمد طاقته من الناس والآخر من الوحدة. وازنا بين الخطط المزدحمة والوقت الهادئ."}},
+ SN:{en:{S:"You both focus on facts and practical details, so you'll agree on what's real.",N:"You both love ideas and possibilities, so your conversations can go anywhere.",x:"One of you sees the details, the other the big picture. Together you cover both."},
+     ar:{S:"كلاكما يركّز على الحقائق والتفاصيل العملية، فستتفقان على ما هو واقعي.",N:"كلاكما يحب الأفكار والاحتمالات، فأحاديثكما يمكن أن تذهب إلى أي مكان.",x:"أحدكما يرى التفاصيل والآخر الصورة الكبيرة. معاً تغطيان الجانبين."}},
+ TF:{en:{T:"You both decide with logic, so disagreements stay direct and fair.",F:"You both decide with your hearts, so you'll look after each other's feelings.",x:"One of you leads with logic, the other with feelings. Listen for what the other values."},
+     ar:{T:"كلاكما يقرر بالمنطق، فتبقى خلافاتكما مباشرة وعادلة.",F:"كلاكما يقرر بقلبه، فستراعيان مشاعر بعضكما.",x:"أحدكما يبدأ بالمنطق والآخر بالمشاعر. استمعا لما يهمّ الآخر."}},
+ JP:{en:{J:"You both like plans and order, so shared projects run smoothly.",P:"You both like to stay flexible, so last-minute plans won't bother either of you.",x:"One of you likes plans, the other flexibility. Agree on what must be fixed and what can stay open."},
+     ar:{J:"كلاكما يحب الخطط والنظام، فتسير مشاريعكما المشتركة بسلاسة.",P:"كلاكما يحب المرونة، فلن تزعجكما الخطط المفاجئة.",x:"أحدكما يحب الخطط والآخر المرونة. اتفقا على ما يجب تثبيته وما يمكن تركه مفتوحاً."}},
 };
