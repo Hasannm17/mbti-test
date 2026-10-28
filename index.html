@@ -10,6 +10,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#3a5bd9">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%233a5bd9'/><text x='16' y='22' font-family='sans-serif' font-size='13' font-weight='800' fill='white' text-anchor='middle'>16</text></svg>">
+<script>try{const t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Kufi+Arabic:wght@400;600&display=swap">
 <style>
@@ -35,6 +36,12 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
 .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 header{display:flex;flex-direction:column;gap:8px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+button.btn.theme{padding:6px 11px;font-size:17px;line-height:1}
+.theme .sun{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .theme .sun{display:inline}:root:not([data-theme="light"]) .theme .moon{display:none}}
+:root[data-theme="dark"] .theme .sun{display:inline}
+:root[data-theme="dark"] .theme .moon{display:none}
 header h1{font-size:clamp(30px,6vw,44px);font-weight:800;letter-spacing:-.02em}
 header p{margin:0;color:var(--muted);max-width:60ch}
 
@@ -100,7 +107,7 @@ button.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 <body>
 <div class="wrap">
   <header>
-    <div class="eyebrow">Personality test · 40 statements · ~6 minutes</div>
+    <div class="top"><div class="eyebrow">Personality test · 40 statements · ~6 minutes</div><button class="btn theme" id="theme" aria-label="Switch dark or light theme" title="Switch theme"><span class="moon">☾</span><span class="sun">☀</span></button></div>
     <h1>Which of the 16 types are you?</h1>
     <p>Rate how much each statement sounds like you. Answer how you usually are, not how you wish you were. There are no right answers.</p>
   </header>
@@ -229,9 +236,14 @@ let t;
 function pick(v){
   ans[idx]=v; save(); render();
   clearTimeout(t);
-  t=setTimeout(()=>{ if(idx<Q.length-1){idx++;save();render();} },260);
+  t=setTimeout(()=>$("next").click(),150); // auto-advance; on the last question this shows the result
 }
-$("back").onclick=()=>{if(idx>0){idx--;save();render();}};
+$("back").onclick=()=>{clearTimeout(t);if(idx>0){idx--;save();render();}};
+$("theme").onclick=()=>{
+  const r=document.documentElement, cur=r.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  r.dataset.theme=cur==="dark"?"light":"dark";
+  try{localStorage.setItem("theme",r.dataset.theme)}catch(e){}
+};
 $("next").onclick=()=>{
   if(ans[idx]===null)return;
   if(idx<Q.length-1){idx++;save();render();}
