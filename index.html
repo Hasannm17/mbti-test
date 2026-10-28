@@ -232,13 +232,8 @@ function render(){
   $("next").disabled=ans[idx]===null;
   $("next").textContent=idx===Q.length-1?"See my type":"Next";
 }
-let t;
-function pick(v){
-  ans[idx]=v; save(); render();
-  clearTimeout(t);
-  t=setTimeout(()=>$("next").click(),150); // auto-advance; on the last question this shows the result
-}
-$("back").onclick=()=>{clearTimeout(t);if(idx>0){idx--;save();render();}};
+function pick(v){ ans[idx]=v; save(); render(); }
+$("back").onclick=()=>{if(idx>0){idx--;save();render();}};
 $("theme").onclick=()=>{
   const r=document.documentElement, cur=r.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
   r.dataset.theme=cur==="dark"?"light":"dark";
